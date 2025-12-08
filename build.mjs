@@ -1,8 +1,6 @@
 import * as esbuild from 'esbuild';
 import { copyFile, mkdir } from 'fs/promises';
 import { rm } from 'fs/promises';
-// Fix: Resolve typing error for process.exit by importing exit directly from node:process.
-import { exit } from 'node:process';
 
 const outdir = 'public';
 
@@ -35,5 +33,7 @@ try {
   console.log('Build finished successfully!');
 } catch (error) {
   console.error('Build failed:', error);
-  exit(1);
+  // FIX: Re-throwing the error will cause the process to exit with a non-zero status code,
+  // which is a cleaner way to handle build failures than calling process.exit() directly.
+  throw error;
 }

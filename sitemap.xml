@@ -7,7 +7,7 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://build-by-prohor.vercel.app/about</loc>
+    <loc>https://build-by-prohor.vercel.app/#/about</loc>
     <lastmod>2024-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AnimatedPage from '../components/AnimatedPage';
 import ProjectModal from '../components/ProjectModal';
+import NotificationBanner from '../components/NotificationBanner';
+import { useAuth } from '../hooks/useAuth';
 // FIX: Import Variants type from framer-motion to correctly type animation variants.
 import { motion, Variants, AnimatePresence } from 'framer-motion';
 
@@ -37,27 +39,27 @@ const services: Service[] = [
 
 const projects: Project[] = [
     { 
-        image: 'https://picsum.photos/seed/gov/400/300', 
+        image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=400&auto=format&fit=crop', 
         title: 'Government School Portal', 
         description: 'A comprehensive management system for a local government school to manage students, faculty, and records.',
         longDescription: 'This project was developed to modernize the administrative processes of a local government school. It features role-based access for students, teachers, and administrators. Key features include an online attendance system, grade management, a notice board, and a parent communication portal. The system significantly reduced paperwork and improved data accuracy.',
-        screenshots: ['https://picsum.photos/seed/gov-ss1/800/600', 'https://picsum.photos/seed/gov-ss2/800/600', 'https://picsum.photos/seed/gov-ss3/800/600'],
+        screenshots: ['https://images.unsplash.com/photo-1634733358822-a511393c3b4a?w=800&auto=format&fit=crop', 'https://plus.unsplash.com/premium_photo-1685283594242-780b2a884482?w=800&auto=format&fit=crop', 'https://images.unsplash.com/photo-1601933973783-43cf14a1c546?w=800&auto=format&fit=crop'],
         repoLink: 'https://github.com'
     },
     { 
-        image: 'https://picsum.photos/seed/biz/400/300', 
+        image: 'https://images.unsplash.com/photo-1522204523234-8729aa6e3d5f?q=80&w=400&auto=format&fit=crop', 
         title: 'E-commerce Platform', 
         description: 'A feature-rich online store for a local business, enabling them to sell products nationwide.',
         longDescription: 'Built from the ground up, this e-commerce platform provides a seamless shopping experience. It includes product catalog management, a secure payment gateway integration (Stripe), user account management with order history, and a responsive design that works flawlessly on desktops and mobile devices. The admin dashboard provides insights into sales and inventory.',
-        screenshots: ['https://picsum.photos/seed/biz-ss1/800/600', 'https://picsum.photos/seed/biz-ss2/800/600'],
+        screenshots: ['https://images.unsplash.com/photo-1585250472445-53883a9161a8?w=800&auto=format&fit=crop', 'https://images.unsplash.com/photo-1551523419-8e27c768c2a8?w=800&auto=format&fit=crop'],
         liveLink: 'https://google.com'
     },
     { 
-        image: 'https://picsum.photos/seed/portfolio/400/300', 
+        image: 'https://images.unsplash.com/photo-1558655146-364adaf1fcc9?q=80&w=400&auto=format&fit=crop', 
         title: 'Personal Portfolio Network', 
         description: 'A platform for creators to build and showcase their personal portfolios and connect with peers.',
         longDescription: 'This is a social platform for creative professionals to showcase their work. Users can create customizable portfolio pages, upload projects, and follow other creators. It features a discovery feed to find inspiring work and a messaging system for networking and collaboration. The goal was to create a community-focused space for artists and developers.',
-        screenshots: ['https://picsum.photos/seed/port-ss1/800/600', 'https://picsum.photos/seed/port-ss2/800/600', 'https://picsum.photos/seed/port-ss3/800/600', 'https://picsum.photos/seed/port-ss4/800/600'],
+        screenshots: ['https://images.unsplash.com/photo-1621361251918-4770f3f65f02?w=800&auto=format&fit=crop', 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop', 'https://images.unsplash.com/photo-1586953208448-b95a898d9237?w=800&auto=format&fit=crop', 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&auto=format&fit=crop'],
         liveLink: 'https://google.com',
         repoLink: 'https://github.com'
     },
@@ -96,9 +98,35 @@ const itemVariants: Variants = {
 
 const AboutPage: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const { user, loading } = useAuth();
+  const [isBannerVisible, setIsBannerVisible] = useState(false);
+
+  useEffect(() => {
+    // Show banner only if not loading, user is not logged in, and it hasn't been dismissed
+    if (!loading && !user) {
+      const isDismissed = sessionStorage.getItem('notificationDismissed');
+      if (!isDismissed) {
+        setIsBannerVisible(true);
+      }
+    } else {
+        // Hide banner if user is logged in
+        setIsBannerVisible(false);
+    }
+  }, [user, loading]);
+
+  const handleBannerClose = () => {
+    sessionStorage.setItem('notificationDismissed', 'true');
+    setIsBannerVisible(false);
+  };
 
   return (
     <AnimatedPage>
+      <AnimatePresence>
+        {isBannerVisible && (
+            <NotificationBanner onClose={handleBannerClose} />
+        )}
+      </AnimatePresence>
+
       <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 text-dark-text">
         
         {/* Profile Card */}
@@ -109,7 +137,7 @@ const AboutPage: React.FC = () => {
             transition={{ duration: 0.5 }}
         >
           <div className="md:w-1/3">
-            <img className="h-48 w-full object-cover md:h-full" src="https://picsum.photos/seed/prohor/400/400" alt="Shakibul Islam Prohor" />
+            <img className="h-48 w-full object-cover md:h-full" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=400&auto=format&fit=crop" alt="Shakibul Islam Prohor" />
           </div>
           <div className="p-8 md:w-2/3">
             <div className="uppercase tracking-wide text-sm text-primary font-semibold">Web Developer</div>

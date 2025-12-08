@@ -1,12 +1,25 @@
-
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
+import { signOut } from 'firebase/auth';
+import { auth } from '../firebase';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, loading } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate('/'); // Redirect to home after logout
+    } catch (error) {
+      console.error("Failed to log out", error);
+    }
+  };
 
   const navLinkClasses = ({ isActive }: { isActive: boolean }): string =>
-    `px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 ${
+    `block px-3 py-2 rounded-md text-base md:text-sm font-medium transition-colors duration-300 ${
       isActive
         ? 'bg-primary text-white'
         : 'text-dark-text hover:bg-primary/10 hover:text-primary'
@@ -29,6 +42,24 @@ const Header: React.FC = () => {
               <NavLink to="/about" className={navLinkClasses}>
                 About
               </NavLink>
+              {!loading && (
+                <>
+                  {user ? (
+                    <>
+                      <NavLink to="/profile" className={navLinkClasses}>
+                        Profile
+                      </NavLink>
+                      <button onClick={handleLogout} className="px-3 py-2 rounded-md text-sm font-medium text-dark-text hover:bg-red-500/10 hover:text-red-600 transition-colors">
+                        Logout
+                      </button>
+                    </>
+                  ) : (
+                    <NavLink to="/login" className={navLinkClasses}>
+                      Login
+                    </NavLink>
+                  )}
+                </>
+              )}
             </div>
           </div>
           <div className="md:hidden">
@@ -57,6 +88,24 @@ const Header: React.FC = () => {
             <NavLink to="/about" className={navLinkClasses} onClick={() => setIsMenuOpen(false)}>
               About
             </NavLink>
+            {!loading && (
+              <>
+                {user ? (
+                  <>
+                    <NavLink to="/profile" className={navLinkClasses} onClick={() => setIsMenuOpen(false)}>
+                      Profile
+                    </NavLink>
+                    <button onClick={() => { handleLogout(); setIsMenuOpen(false); }} className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-dark-text hover:bg-red-500/10 hover:text-red-600 transition-colors">
+                      Logout
+                    </button>
+                  </>
+                ) : (
+                  <NavLink to="/login" className={navLinkClasses} onClick={() => setIsMenuOpen(false)}>
+                    Login
+                  </NavLink>
+                )}
+              </>
+            )}
           </div>
         </div>
       )}
