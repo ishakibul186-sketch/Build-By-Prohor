@@ -1,5 +1,5 @@
 
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, useEffect } from 'react';
 import AnimatedPage from '../../components/AnimatedPage';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../hooks/useAuth';
@@ -72,6 +72,24 @@ const SupportPage: React.FC = () => {
   const [formData, setFormData] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionStatus, setSubmissionStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  useEffect(() => {
+    document.title = 'Support – Build By Prohor';
+    
+    // Helper to set meta tags
+    const setMetaTag = (name: string, content: string) => {
+      let element = document.querySelector(`meta[name="${name}"]`);
+      if (!element) {
+        element = document.createElement('meta');
+        element.setAttribute('name', name);
+        document.head.appendChild(element);
+      }
+      element.setAttribute('content', content);
+    };
+
+    setMetaTag('description', 'Get help with your account, report issues, or make a ban appeal. Contact the Build By Prohor support team for assistance.');
+    setMetaTag('author', 'Support-Build By Prohor');
+  }, []);
 
   const toggleTopic = (index: number) => {
     if (openIndex === index) {

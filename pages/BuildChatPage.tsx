@@ -44,6 +44,24 @@ const BuildChatPage: React.FC = () => {
   const [loadingChats, setLoadingChats] = useState(true);
   const [userProfilePic, setUserProfilePic] = useState<string | null>(null);
 
+  useEffect(() => {
+    document.title = 'Build Website & Chat – Build By Prohor';
+    
+    // Helper to set meta tags
+    const setMetaTag = (name: string, content: string) => {
+      let element = document.querySelector(`meta[name="${name}"]`);
+      if (!element) {
+        element = document.createElement('meta');
+        element.setAttribute('name', name);
+        document.head.appendChild(element);
+      }
+      element.setAttribute('content', content);
+    };
+
+    setMetaTag('description', 'Start a new project with Build By Prohor. Use our integrated chat to discuss your website requirements, submit details, and track progress.');
+    setMetaTag('author', 'Build Website & Chat-Build By Prohor');
+  }, []);
+
   // Fetch user's current profile picture once to store with new chats
   useEffect(() => {
     if (user && !authLoading) {
