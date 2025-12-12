@@ -1,45 +1,13 @@
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import AnimatedPage from '../components/AnimatedPage';
-import NotificationBanner from '../components/NotificationBanner';
-import { useAuth } from '../hooks/useAuth';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const HomePage: React.FC = () => {
-  const { user, loading } = useAuth();
-  const [isBannerVisible, setIsBannerVisible] = useState(false);
-
-  useEffect(() => {
-    // Show banner only if not loading, user is not logged in, and it hasn't been dismissed
-    if (!loading && !user) {
-      const isDismissed = sessionStorage.getItem('notificationDismissed');
-      if (!isDismissed) {
-        setIsBannerVisible(true);
-      }
-    } else {
-        // Hide banner if user is logged in
-        setIsBannerVisible(false);
-    }
-  }, [user, loading]);
-
-  const handleBannerClose = () => {
-    sessionStorage.setItem('notificationDismissed', 'true');
-    setIsBannerVisible(false);
-  };
-
-
   return (
     <AnimatedPage>
-      <div className="relative h-[calc(100vh-4rem)]">
-        <AnimatePresence>
-          {isBannerVisible && (
-            <div className="absolute top-0 left-0 right-0 z-20">
-                <NotificationBanner onClose={handleBannerClose} />
-            </div>
-          )}
-        </AnimatePresence>
-      
+      <div className="relative h-screen">
         <div className="w-full h-full flex items-center justify-center text-center text-white overflow-hidden">
           <div className="absolute inset-0">
             <img
@@ -75,7 +43,7 @@ const HomePage: React.FC = () => {
                 to="/about"
                 className="bg-primary text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-primary-dark transition-transform transform hover:scale-105 duration-300 shadow-lg"
               >
-                Learn More About Me
+                Learn More About My Services
               </Link>
             </motion.div>
           </div>

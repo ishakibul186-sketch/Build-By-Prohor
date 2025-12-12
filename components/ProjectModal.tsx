@@ -1,7 +1,19 @@
+
 import React, { useState } from 'react';
 // FIX: Import Variants from framer-motion to correctly type the modal variants.
 import { motion, Variants } from 'framer-motion';
-import { Project } from '../pages/AboutPage';
+// FIX: The 'Project' interface was not exported from '../pages/AboutPage'.
+// Defining it here locally to resolve the 'no exported member' error.
+export interface Project {
+  id: string;
+  title: string;
+  shortDescription: string;
+  longDescription: string;
+  technologies: string[];
+  screenshots: string[];
+  liveLink?: string;
+  repoLink?: string;
+}
 
 interface ProjectModalProps {
   project: Project;
@@ -39,14 +51,14 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
       onClick={onClose}
     >
       <motion.div
-        className="bg-light-bg rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto"
+        className="bg-slate-900 rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto"
         variants={modal}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="p-6 relative">
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 text-light-text hover:text-dark-text transition-colors text-2xl z-10"
+            className="absolute top-4 right-4 text-slate-400 hover:text-slate-200 transition-colors text-2xl z-10"
             aria-label="Close project details"
           >
             <i className="fas fa-times-circle"></i>
@@ -55,7 +67,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
           
           {/* Screenshot Gallery */}
           <div className="mb-6">
-            <div className="w-full aspect-video rounded-lg overflow-hidden mb-2 bg-gray-200">
+            <div className="w-full aspect-video rounded-lg overflow-hidden mb-2 bg-slate-800">
                 <img src={activeScreenshot} alt={`${project.title} screenshot`} className="w-full h-full object-cover" />
             </div>
             <div className="flex gap-2">
@@ -73,8 +85,8 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
           
           {/* Long Description */}
           <div className="mb-6">
-            <h3 className="text-xl font-bold text-dark-text mb-2">About this project</h3>
-            <p className="text-light-text whitespace-pre-wrap">{project.longDescription}</p>
+            <h3 className="text-xl font-bold text-slate-200 mb-2">About this project</h3>
+            <p className="text-slate-400 whitespace-pre-wrap">{project.longDescription}</p>
           </div>
           
           {/* Links */}
@@ -96,7 +108,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                   href={project.repoLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 bg-dark-text text-white font-bold py-2 px-6 rounded-full hover:bg-opacity-90 transition-transform transform hover:scale-105 duration-300"
+                  className="flex items-center justify-center gap-2 bg-dark-text bg-slate-700 text-white font-bold py-2 px-6 rounded-full hover:bg-opacity-90 transition-transform transform hover:scale-105 duration-300"
                 >
                   <i className="fab fa-github"></i>
                   <span>View Code</span>

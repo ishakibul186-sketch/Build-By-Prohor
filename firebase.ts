@@ -1,6 +1,17 @@
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getDatabase } from "firebase/database";
+
+import { initializeApp, type FirebaseApp } from "firebase/app";
+import { 
+  getDatabase,
+  ref,
+  set,
+  get,
+  update,
+  onValue,
+  serverTimestamp,
+  push,
+} from "firebase/database";
+
+import { getAuth, GoogleAuthProvider, type User, signOut } from "firebase/auth";
 
 // User-provided firebase config
 const firebaseConfig = {
@@ -14,9 +25,24 @@ const firebaseConfig = {
   measurementId: "G-BLW3ZJVHL5"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+// Initialize Firebase App
+const app: FirebaseApp = initializeApp(firebaseConfig);
 
-// Export auth and database services
+// Export Auth and Database instances
 export const auth = getAuth(app);
 export const db = getDatabase(app);
+
+// Export GoogleAuthProvider and modular DB functions
+export { 
+  GoogleAuthProvider, 
+  signOut, 
+  ref, 
+  set,
+  get, 
+  update, 
+  onValue, 
+  serverTimestamp, 
+  push, 
+};
+
+export type { User, FirebaseApp };

@@ -1,116 +1,220 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import { signOut } from 'firebase/auth';
-import { auth } from '../firebase';
+import { signOut } from 'firebase/auth'; 
+import { auth, db, ref, get } from '../firebase'; // Import db and ref, get for fetching profile pic
+import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from '../hooks/useTheme';
 
 const Header: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user, loading } = useAuth();
+  const [isOpen, setIsOpen] = useState(false);
+  const { user, authLoading, isAdmin, isAdminLoading } = useAuth(); // Destructure isAdmin and isAdminLoading
   const navigate = useNavigate();
+  const { theme, toggleTheme } = useTheme(); 
+  
+  // State for header profile picture
+  const [headerProfilePic, setHeaderProfilePic] = useState<string | null>(null);
+  const [headerPicLoading, setHeaderPicLoading] = useState(true);
+
+  // Fetch user's profile picture for the header
+  useEffect(() => {
+    if (authLoading) {
+      return;
+    }
+
+    if (user) {
+      const fetchPic = async () => {
+        setHeaderPicLoading(true);
+        try {
+          const userRef = ref(db, `Users/${user.uid}`); 
+          const snapshot = await get(userRef); 
+          if (snapshot.exists()) {
+            const data = snapshot.val();
+            setHeaderProfilePic(data.picBase64 || null);
+          } else {
+            setHeaderProfilePic(null); // No profile pic found
+          }
+        } catch (err) {
+          console.error("Failed to fetch header profile pic:", err);
+          setHeaderProfilePic(null);
+        } finally {
+          setHeaderPicLoading(false);
+        }
+      };
+      fetchPic();
+    } else {
+      setHeaderProfilePic(null);
+      setHeaderPicLoading(false);
+    }
+  }, [user, authLoading]);
+
 
   const handleLogout = async () => {
     try {
-      await signOut(auth);
-      navigate('/'); // Redirect to home after logout
+      await signOut(auth); 
+      setIsOpen(false);
+      navigate('/');
     } catch (error) {
       console.error("Failed to log out", error);
     }
   };
 
-  const navLinkClasses = ({ isActive }: { isActive: boolean }): string =>
-    `block px-3 py-2 rounded-md text-base md:text-sm font-medium transition-colors duration-300 ${
-      isActive
-        ? 'bg-primary text-white'
-        : 'text-dark-text hover:bg-primary/10 hover:text-primary'
-    }`;
+  const closeMenu = () => setIsOpen(false);
+  
+  // Dynamically build the list of all links for the sidebar in the desired order
+  const allLinks = [
+    { to: '/', text: 'Home', icon: 'fas fa-home' },
+    { to: '/about', text: 'About', icon: 'fas fa-info-circle' },
+  ];
+
+  if (user) {
+    allLinks.push({ to: '/build-chat', text: 'Build Website & Chat', icon: 'fas fa-comments' });
+    allLinks.push({ to: '/profile', text: 'Profile', icon: 'fas fa-user' });
+  }
+
+  allLinks.push({ to: '/support', text: 'Support', icon: 'fas fa-headset' });
+
+  if (user && isAdmin) {
+    allLinks.push({ to: '/admin', text: 'Admin Panel', icon: 'fas fa-user-shield' });
+  }
 
   return (
-    <header className="bg-white/80 backdrop-blur-md shadow-md sticky top-0 z-50">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-slate-800 shadow-sm border-b border-slate-700">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex-shrink-0">
-            <NavLink to="/" className="text-2xl font-bold text-primary">
+        <div className="flex justify-between items-center h-16">
+          {/* Brand Logo */}
+          <div className="flex-shrink-0 flex items-center">
+            <NavLink 
+                to="/" 
+                className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary tracking-tight" 
+                onClick={closeMenu}
+            >
               Build By Prohor
             </NavLink>
           </div>
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
-              <NavLink to="/" className={navLinkClasses}>
-                Home
-              </NavLink>
-              <NavLink to="/about" className={navLinkClasses}>
-                About
-              </NavLink>
-              {!loading && (
-                <>
-                  {user ? (
-                    <>
-                      <NavLink to="/profile" className={navLinkClasses}>
-                        Profile
-                      </NavLink>
-                      <button onClick={handleLogout} className="px-3 py-2 rounded-md text-sm font-medium text-dark-text hover:bg-red-500/10 hover:text-red-600 transition-colors">
-                        Logout
-                      </button>
-                    </>
-                  ) : (
-                    <NavLink to="/login" className={navLinkClasses}>
-                      Login
+
+          <div className="flex items-center gap-4"> {/* Added gap for spacing between new elements and menu */}
+            {/* Login Button / Profile Picture in Toolbar */}
+            {!authLoading && (
+                user ? (
+                    <NavLink to="/profile" onClick={closeMenu} aria-label="View Profile">
+                        {headerPicLoading ? (
+                            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary"></div>
+                        ) : (
+                            <img 
+                                src={headerProfilePic || 'https://via.placeholder.com/150'} 
+                                alt="Profile" 
+                                className="w-9 h-9 rounded-full object-cover ring-2 ring-primary/30"
+                                onError={(e) => (e.currentTarget.src = 'https://via.placeholder.com/150')} // Fallback image
+                            />
+                        )}
                     </NavLink>
-                  )}
-                </>
-              )}
-            </div>
-          </div>
-          <div className="md:hidden">
+                ) : (
+                    <NavLink 
+                        to="/login" 
+                        onClick={closeMenu} 
+                        className="text-primary hover:text-primary-dark transition-colors flex items-center gap-2 px-3 py-1 rounded-md text-sm font-bold"
+                        aria-label="Login"
+                    >
+                        <i className="fas fa-sign-in-alt text-lg"></i>
+                        <span>Login</span>
+                    </NavLink>
+                )
+            )}
+
+            {/* Mobile Menu Button */}
             <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-dark-text hover:text-white hover:bg-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-              aria-controls="mobile-menu"
-              aria-expanded="false"
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-gray-200 hover:text-primary focus:outline-none p-2"
+              aria-label="Toggle menu"
             >
-              <span className="sr-only">Open main menu</span>
-              {!isMenuOpen ? (
-                <i className="fas fa-bars fa-fw"></i>
-              ) : (
-                <i className="fas fa-times fa-fw"></i>
-              )}
+              <i className={`fas ${isOpen ? 'fa-times' : 'fa-bars'} text-2xl`}></i>
             </button>
           </div>
         </div>
       </div>
-      {isMenuOpen && (
-        <div className="md:hidden" id="mobile-menu">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <NavLink to="/" className={navLinkClasses} onClick={() => setIsMenuOpen(false)}>
-              Home
-            </NavLink>
-            <NavLink to="/about" className={navLinkClasses} onClick={() => setIsMenuOpen(false)}>
-              About
-            </NavLink>
-            {!loading && (
-              <>
-                {user ? (
-                  <>
-                    <NavLink to="/profile" className={navLinkClasses} onClick={() => setIsMenuOpen(false)}>
-                      Profile
-                    </NavLink>
-                    <button onClick={() => { handleLogout(); setIsMenuOpen(false); }} className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-dark-text hover:bg-red-500/10 hover:text-red-600 transition-colors">
-                      Logout
-                    </button>
-                  </>
-                ) : (
-                  <NavLink to="/login" className={navLinkClasses} onClick={() => setIsMenuOpen(false)}>
-                    Login
-                  </NavLink>
-                )}
-              </>
-            )}
-          </div>
-        </div>
-      )}
+
+      {/* Mobile Menu Sidebar */}
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              className="fixed inset-0 bg-black/60 z-40"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsOpen(false)}
+            />
+
+            {/* Sidebar */}
+            <motion.div 
+              className="fixed top-0 left-0 h-full w-72 bg-slate-800 shadow-xl z-50 flex flex-col"
+              initial={{ x: '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '-100%' }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+            >
+              {/* Sidebar Header */}
+              <div className="p-4 border-b border-slate-700 flex justify-between items-center">
+                  <h3 className="text-xl font-bold text-primary">Menu</h3>
+                  <button onClick={closeMenu} className="text-gray-200 hover:text-primary" aria-label="Close menu">
+                      <i className="fas fa-times text-2xl"></i>
+                  </button>
+              </div>
+              
+              {/* Navigation Links */}
+              <div className="flex-grow p-4 space-y-2">
+                {allLinks.map(link => (
+                  <MobileNavLink key={link.to} to={link.to} icon={link.icon} onClick={closeMenu}>
+                    {link.text}
+                  </MobileNavLink>
+                ))}
+              </div>
+
+              {/* Logout Button (Only if logged in) */}
+              {!authLoading && user && (
+                  <div className="p-4 border-t border-slate-700">
+                      <button
+                          onClick={handleLogout}
+                          className="w-full text-left flex items-center gap-4 px-3 py-3 rounded-md text-base font-medium text-red-500 hover:bg-red-50 hover:bg-red-500/10 transition-colors"
+                      >
+                          <i className="fas fa-sign-out-alt w-6 text-center text-lg"></i>
+                          <span>Logout</span>
+                      </button>
+                  </div>
+              )}
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </header>
   );
 };
+
+interface MobileNavLinkProps {
+    to: string;
+    children: React.ReactNode;
+    icon: string;
+    onClick: () => void;
+}
+
+const MobileNavLink: React.FC<MobileNavLinkProps> = ({ to, children, icon, onClick }) => (
+  <NavLink
+    to={to}
+    onClick={onClick}
+    className={({ isActive }) =>
+      `flex items-center gap-4 px-3 py-3 rounded-md text-base font-bold transition-colors border-l-4 ${
+        isActive
+          ? 'border-primary text-primary bg-slate-700/50'
+          : 'border-transparent text-slate-300 hover:text-white hover:bg-slate-700'
+      }`
+    }
+  >
+    <i className={`${icon} w-6 text-center text-lg`}></i>
+    <span>{children}</span>
+  </NavLink>
+);
 
 export default Header;

@@ -1,3 +1,4 @@
+
 import React, { useState, useRef } from 'react';
 import ReactCrop, { type Crop, centerCrop, makeAspectCrop } from 'react-image-crop';
 import { motion } from 'framer-motion';
@@ -93,14 +94,14 @@ const ImageCropModal: React.FC<ImageCropModalProps> = ({ imgSrc, onSave, onClose
       onClick={onClose}
     >
       <motion.div
-        className="bg-white rounded-lg shadow-xl w-full max-w-2xl p-6"
+        className="bg-slate-800 rounded-lg shadow-xl w-full max-w-2xl p-6"
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: -50, opacity: 0 }}
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className="text-2xl font-bold text-dark-text mb-4">Crop Your Image</h2>
-        <div className="flex justify-center bg-gray-100 p-4 rounded-md">
+        <h2 className="text-2xl font-bold text-slate-100 mb-4">Crop Your Image</h2>
+        <div className="flex justify-center bg-slate-900 p-4 rounded-md">
             <ReactCrop
                 crop={crop}
                 onChange={(_, percentCrop) => setCrop(percentCrop)}
@@ -115,7 +116,7 @@ const ImageCropModal: React.FC<ImageCropModalProps> = ({ imgSrc, onSave, onClose
         <canvas ref={previewCanvasRef} style={{ display: 'none' }} />
 
         <div className="flex justify-end gap-4 mt-6">
-          <button onClick={onClose} className="px-4 py-2 rounded-md text-dark-text hover:bg-gray-100 transition-colors">
+          <button onClick={onClose} className="px-4 py-2 rounded-md text-slate-200 hover:bg-slate-700 transition-colors">
             Cancel
           </button>
           <button onClick={handleSaveCrop} className="px-4 py-2 rounded-md text-white bg-primary hover:bg-primary-dark transition-colors">
