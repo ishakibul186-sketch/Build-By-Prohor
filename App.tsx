@@ -1,6 +1,6 @@
 
 import React, { ReactNode, useEffect, useState } from 'react';
-import { HashRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import Header from './components/Header';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
@@ -126,9 +126,7 @@ const AppContent: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <HashRouter>
-      <AppContent />
-    </HashRouter>
+    <AppContent />
   );
 };
 
