@@ -16,6 +16,13 @@
   "All Servise List" : [ "E-Commerce Website Development","Product Management System","Secure Payment Integration",
     "Cart & Checkout System"
 ],
+
+"Build By Prohor All Page": {
+  "home": "https://build-by-prohor.vercel.app/",
+  "about": "https://build-by-prohor.vercel.app/about",
+  "support": "https://build-by-prohor.vercel.app/support",
+  "Chat & Build Your Project By Admin": "https://build-by-prohor.vercel.app/build-chat"
+},
   "purpose": "Educational platform for students to learn and showcase web projects",
   "target_audience": [
     "Students",
