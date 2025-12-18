@@ -4,8 +4,12 @@ Welcome to the official documentation for **Build By Prohor**. This document pro
 
 ## 1. Project Overview
 
-### Project Name
+### Site Name
 Build By Prohor
+### Owner info
+Name : Shakibul ISlam
+From : Bangladesh
+Adderess : Companigonj Nokhali / Basurhat
 
 ### Description
 This platform serves as a professional portfolio for Shakibul Islam Prohor and a hub for providing software development services. It is designed to facilitate seamless communication between the client and the developer, from initial project inquiry to final delivery. The site also aims to offer a suite of digital tools beneficial for students and professionals.
