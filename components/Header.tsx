@@ -73,7 +73,9 @@ const Header: React.FC = () => {
     allLinks.push({ to: '/profile', text: 'Profile', icon: 'fas fa-user' });
   }
 
+  allLinks.push({ to: '/docs', text: 'Docs', icon: 'fas fa-book' });
   allLinks.push({ to: '/support', text: 'Support', icon: 'fas fa-headset' });
+
 
   if (user && isAdmin) {
     allLinks.push({ to: '/admin', text: 'Admin Panel', icon: 'fas fa-user-shield' });

@@ -1,5 +1,5 @@
 import * as esbuild from 'esbuild';
-import { copyFile, mkdir } from 'fs/promises';
+import { copyFile, mkdir, cp } from 'fs/promises';
 import { rm } from 'fs/promises';
 
 const outdir = 'public';
@@ -25,10 +25,14 @@ try {
     },
   });
 
-  // Copy static files
+  // Copy static files and directories
   await copyFile('index.html', `${outdir}/index.html`);
   await copyFile('google094f0a5dcd31b0ad.html', `${outdir}/google094f0a5dcd31b0ad.html`);
   await copyFile('sitemap.xml', `${outdir}/sitemap.xml`);
+  await copyFile('robots.txt', `${outdir}/robots.txt`);
+  await copyFile('ai-info.json', `${outdir}/ai-info.json`);
+  await cp('docs', `${outdir}/docs`, { recursive: true });
+
 
   console.log('Build finished successfully!');
 } catch (error) {

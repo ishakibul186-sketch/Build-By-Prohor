@@ -11,6 +11,7 @@ import BannedAccountPage from './pages/BannedAccountPage';
 import BuildChatPage from './pages/BuildChatPage';
 import ChatConversationPage from './pages/ChatConversationPage';
 import SupportPage from './pages/support/SupportPage';
+import DocsPage from './pages/DocsPage'; // Import the new DocsPage
 import { useAuth } from './hooks/useAuth';
 import { AnimatePresence } from 'framer-motion';
 
@@ -84,6 +85,7 @@ const AppRoutes: React.FC = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/support" element={<SupportPage />} />
+        <Route path="/docs" element={<DocsPage />} /> {/* Add new docs route */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/banned" element={<BannedAccountPage />} />
         
