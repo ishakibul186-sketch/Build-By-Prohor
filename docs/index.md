@@ -7,8 +7,8 @@ Welcome to the official documentation for **Build By Prohor**. This document pro
 ### Site Name
 Build By Prohor
 ### Owner info
-Name : Shakibul ISlam
-From : Bangladesh
+Name : Shakibul islam,
+From : Bangladesh,
 Adderess : Companigonj Nokhali / Basurhat
 
 ### Description
