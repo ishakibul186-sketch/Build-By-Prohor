@@ -7,7 +7,7 @@ This document provides a comprehensive guide to using the Build By Prohor platfo
 Getting started is simple and secure. Follow these steps to create your account and set up your profile.
 
 ### 1. Creating Your Account
-- Navigate to the [Login Page](https://build-by-prohor.vercel.app/).
+- Navigate to the [Login Page](/login).
 - Click the **"Continue with Google"** button to sign in securely using your Google account. We use Google for authentication to ensure your login process is both easy and secure.
 
 ### 2. Setting Up Your Profile
@@ -27,7 +27,7 @@ Our platform is designed to make our collaboration as smooth as possible.
 - Click **"See Full Profile & Edit"** to update your name, bio, phone number, or address. Note that your date of birth and country cannot be changed after the initial setup for security reasons.
 
 ### Starting a New Project
-- The core of our collaboration happens in the **Build Website & Chat** section, accessible from the sidebar menu or at [/build-chat](https://build-by-prohor.vercel.app/build-chat).
+- The core of our collaboration happens in the **Build Website & Chat** section, accessible from the sidebar menu or at [/build-chat](/build-chat).
 - Click the **"New Chat"** button to start a new project inquiry.
 - You will first be presented with a **Project Details Form**. Please fill this out as accurately as possible. It covers essential information like:
     - Your brand or business name.
@@ -43,7 +43,7 @@ Our platform is designed to make our collaboration as smooth as possible.
 - The admin (Prohor) will respond in the same chat. You will see both your messages and the admin's replies in real-time.
 
 ### The Support Center
-- If you encounter any issues with your account, need to appeal a ban, or have a general question, please visit our [Support Page](https://build-by-prohor.vercel.app/support).
+- If you encounter any issues with your account, need to appeal a ban, or have a general question, please visit our [Support Page](/support).
 - Select the category that best fits your issue.
 - Fill out the form with as much detail as possible.
 - A support ticket will be created, and our team will get back to you at the email address you provide.
