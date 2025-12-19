@@ -22,12 +22,12 @@ Getting started is simple and secure. Follow these steps to create your account 
 Our platform is designed to make our collaboration as smooth as possible.
 
 ### User Profile
-- Your profile page can be accessed by clicking your profile picture in the header or by navigating to [/profile](/profile).
+- Your profile page can be accessed by clicking your profile picture in the header or by navigating to [profile](/profile).
 - Here, you can view a summary of your information.
 - Click **"See Full Profile & Edit"** to update your name, bio, phone number, or address. Note that your date of birth and country cannot be changed after the initial setup for security reasons.
 
 ### Starting a New Project
-- The core of our collaboration happens in the **Build Website & Chat** section, accessible from the sidebar menu or at [/build-chat](/build-chat).
+- The core of our collaboration happens in the **Build Website & Chat** section, accessible from the sidebar menu or at [Chat & Build Your project By Admin](/build-chat).
 - Click the **"New Chat"** button to start a new project inquiry.
 - You will first be presented with a **Project Details Form**. Please fill this out as accurately as possible. It covers essential information like:
     - Your brand or business name.
