@@ -1,45 +1,33 @@
 {
-  "site_name": "Build by Prohor",
-  "description" : "his platform serves as a professional portfolio for Shakibul Islam Prohor and a hub for providing software development services. It is designed to facilitate seamless communication between the client and the developer, from initial project inquiry to final delivery. The site also aims to offer a suite of digital tools beneficial for students and professionals."
-  "tagline": "Learn, Build, and Share Web Projects",
-  "url": "https://build-by-prohor.vercel.app",
-  "language": ["bn", "en"],
-
-  "owner": {
-    "name": "Shakibul Islam Prohor",
-    "role": "Founder & Developer",
-    "from": "Bangladesh",
-    "address": "Companigonj Nokhali - Basurhat",
-    "me": "Student"
-  },
-"Servise" : "e-commarce & school govt & Others"
-  "All Servise List" : [ "E-Commerce Website Development","Product Management System","Secure Payment Integration",
-    "Cart & Checkout System"
-],
-
-"Build By Prohor All Page": {
-  "home": "https://build-by-prohor.vercel.app/",
-  "about": "https://build-by-prohor.vercel.app/about",
-  "support": "https://build-by-prohor.vercel.app/support",
-  "Chat & Build Your Project By Admin": "https://build-by-prohor.vercel.app/build-chat"
-},
-  "purpose": "Educational platform for students to learn and showcase web projects",
-  "target_audience": [
-    "Students",
-    "Beginner developers","others"
+  "site_name": "Build By Prohor",
+  "type": "Software & Student Platform",
+  "description": "A personal portfolio and service platform for Shakibul Islam Prohor, offering web development, app development, and various digital tools. The site includes robust client communication and project management features.",
+  "services": [
+    "Custom Web Development (Frontend & Backend)",
+    "Full-Stack Web Application Solutions",
+    "UI/UX Design from concept to implementation",
+    "Student Productivity Tools"
   ],
-
-  "tech_stack": {
-    "frontend": ["Next.js", "Tailwind CSS"],
-    "backend": ["Firebase"],
-    "language": ["TypeScript"]
+  "features": {
+    "user_accounts": true,
+    "project_chat": true,
+    "admin_panel": true,
+    "support_system": true
   },
-
-  "ai_policy": {
-    "allow_crawl": true,
-    "allow_index": true,
-    "allow_training": false
+  "support_page": {
+    "description": "The support page provides a structured way for users and guests to submit inquiries. It is designed to handle various types of requests efficiently.",
+    "capabilities": [
+      "Submit account and login problem reports.",
+      "File appeals for banned accounts.",
+      "Report security issues or vulnerabilities.",
+      "Ask general questions through an 'Others' category."
+    ],
+    "process_flow": "When a ticket is submitted, it is added to the admin's Support Center queue for review. Status is tracked as 'open' or 'closed'. Communication is handled based on the contact information provided in the ticket."
   },
-
+  "contact": {
+    "primary_method": "Support Page Ticketing System",
+    "secondary_email": "support@yourdomain.com"
+  },
+  "language_support": ["en", "bn"],
   "last_updated": "2025-12-18"
 }

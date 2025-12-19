@@ -31,6 +31,7 @@ try {
   await copyFile('sitemap.xml', `${outdir}/sitemap.xml`);
   await copyFile('robots.txt', `${outdir}/robots.txt`);
   await copyFile('ai-info.json', `${outdir}/ai-info.json`);
+  await copyFile('privacy-policy.md', `${outdir}/privacy-policy.md`);
   await cp('docs', `${outdir}/docs`, { recursive: true });
 
 

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import AnimatedPage from '../components/AnimatedPage';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -73,8 +72,18 @@ const AboutPage: React.FC = () => {
             transition={{ duration: 0.5, delay: 0.3 }}
           >
             <h2 className="text-3xl font-bold text-center text-slate-100 mb-12">My Services</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {[
+                  { 
+                    icon: 'fa-palette', 
+                    title: 'UI/UX Design', 
+                    desc: 'Designing intuitive and engaging user experiences from wireframes to final mockups.' 
+                  },
+                  { 
+                    icon: 'fa-pen-ruler', 
+                    title: 'Web Design', 
+                    desc: 'Crafting visually stunning website layouts that prioritize user experience and brand identity.' 
+                  },
                   { 
                     icon: 'fa-code', 
                     title: 'Frontend Development', 
@@ -83,17 +92,17 @@ const AboutPage: React.FC = () => {
                   { 
                     icon: 'fa-server', 
                     title: 'Backend Development', 
-                    desc: 'Creating robust and scalable server-side applications and APIs.' 
+                    desc: 'Creating robust and scalable server-side applications, databases, and APIs.' 
                   },
-                  { 
-                    icon: 'fa-palette', 
-                    title: 'UI/UX Design', 
-                    desc: 'Designing intuitive and engaging user experiences from wireframes to final mockups.' 
+                  {
+                    icon: 'fa-laptop-code',
+                    title: 'Web Development',
+                    desc: 'Expert development services covering all aspects of web creation, from simple sites to complex applications.'
                   },
                   { 
                     icon: 'fa-layer-group', 
                     title: 'Full-Stack Solutions', 
-                    desc: 'Handling both client and server side to deliver complete web applications.' 
+                    desc: 'Handling both client and server side to deliver complete, end-to-end web applications.' 
                   }
                 ].map((service, index) => (
                     <motion.div

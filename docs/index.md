@@ -1,47 +1,65 @@
-# Site Information & Documentation
+# Welcome to Build By Prohor - Documentation
 
-Welcome to the official documentation for **Build By Prohor**. This document provides a comprehensive overview of the site's purpose, services, features, and policies.
+This document provides a comprehensive guide to using the Build By Prohor platform. Whether you're a new client looking to start a project or a returning user managing your profile, this guide will help you navigate all the features.
 
-## 1. Project Overview
+## Getting Started
 
-### Site Name
-Build By Prohor
-### Owner info
-Name : Shakibul islam,
-From : Bangladesh,
-Adderess : Companigonj Nokhali / Basurhat
+Getting started is simple and secure. Follow these steps to create your account and set up your profile.
 
-### Description
-This platform serves as a professional portfolio for Shakibul Islam Prohor and a hub for providing software development services. It is designed to facilitate seamless communication between the client and the developer, from initial project inquiry to final delivery. The site also aims to offer a suite of digital tools beneficial for students and professionals.
+### 1. Creating Your Account
+- Navigate to the [Login Page](https://build-by-prohor.vercel.app/).
+- Click the **"Continue with Google"** button to sign in securely using your Google account. We use Google for authentication to ensure your login process is both easy and secure.
 
-## 2. Services Offered
+### 2. Setting Up Your Profile
+- After your first login, you will be redirected to the **Profile Setup** page.
+- Please fill in all the required details, including your name, a short bio, contact number, and address.
+- You can upload a profile picture by clicking on the camera icon. We recommend a square image for the best results.
+- Your location can be auto-detected to help fill in your country, but you can also enter it manually.
+- Once you save your profile, you'll be ready to use all the platform's features.
 
-The core services provided through this platform include:
+## Core Features
 
-- **Web Development**: Building modern, responsive, and user-friendly websites and web applications using technologies like `React`, `Firebase`, and more.
-- **App Development**: Crafting custom applications tailored to specific business needs.
-- **UI/UX Design**: Designing intuitive and engaging user interfaces to ensure a great user experience.
-- **Student Tools**: Developing and providing digital tools to aid in student productivity and learning.
+Our platform is designed to make our collaboration as smooth as possible.
 
-## 3. Key Features
+### User Profile
+- Your profile page can be accessed by clicking your profile picture in the header or by navigating to [/profile](/profile).
+- Here, you can view a summary of your information.
+- Click **"See Full Profile & Edit"** to update your name, bio, phone number, or address. Note that your date of birth and country cannot be changed after the initial setup for security reasons.
 
-- **User Authentication**: Secure login and registration using Google Firebase Authentication.
-- **Profile Management**: Users can set up and manage their personal profiles.
-- **Project Chat System**: A dedicated chat system for clients to discuss project requirements directly. Clients can submit a detailed project brief via a form, which initiates a conversation thread.
-- **Admin Dashboard**: A comprehensive backend panel for administrators to manage users, view project orders, and handle support tickets.
-- **Support Center**: A ticketing system for users to report issues, appeal account bans, or ask questions.
+### Starting a New Project
+- The core of our collaboration happens in the **Build Website & Chat** section, accessible from the sidebar menu or at [/build-chat](https://build-by-prohor.vercel.app/build-chat).
+- Click the **"New Chat"** button to start a new project inquiry.
+- You will first be presented with a **Project Details Form**. Please fill this out as accurately as possible. It covers essential information like:
+    - Your brand or business name.
+    - The type of website you need (e.g., E-commerce, Portfolio).
+    - Domain and logo availability.
+    - Your preferred color theme.
+    - Any extra functionalities you require.
+- Submitting this form will create a dedicated chat channel for your project.
 
-## 4. Data Usage and Privacy
+### Chatting About Your Project
+- Once the project form is submitted, the view will switch to a chat interface.
+- Here, you can send text messages to discuss your project further, ask questions, and receive updates from our team.
+- The admin (Prohor) will respond in the same chat. You will see both your messages and the admin's replies in real-time.
 
-This site prioritizes user privacy.
+### The Support Center
+- If you encounter any issues with your account, need to appeal a ban, or have a general question, please visit our [Support Page](https://build-by-prohor.vercel.app/support).
+- Select the category that best fits your issue.
+- Fill out the form with as much detail as possible.
+- A support ticket will be created, and our team will get back to you at the email address you provide.
 
-- **Data Collection**: We collect user data only when necessary for providing our services, such as during account creation and project submission. This includes name, email, and project details. We also collect anonymized device and location information for security and analytics.
-- **User Consent**: We do not collect personal data without user consent.
-- **Data Security**: All data is stored securely using Firebase's Realtime Database and protected by standard security rules.
+## For Administrators
 
-## 5. Contact Information
+The platform includes a dedicated admin panel for site management.
 
-For inquiries, support, or business proposals, please use the following methods:
+-   **User Management:** View all registered users, edit their profiles, and manage their account status (active/banned).
+-   **Order Management:** Access all project chats initiated by users to review project details and communicate with clients.
+-   **Support Center:** View and respond to all support tickets submitted by users.
 
-- **Primary**: Use the [Support Page](/support) on our website for a tracked ticketing experience.
-- **Secondary Email**: `support@yourdomain.com`
+## Privacy & Security
+
+We take your privacy seriously. Your data is managed securely using Firebase's robust infrastructure. For more detailed information, please read our [Privacy Policy](/privacy-policy.md).
+
+## Contact Us
+
+For any inquiries not covered by the Support Center, you can reach out via the contact methods listed on the [About Page](https://build-by-prohor.vercel.app//about).
