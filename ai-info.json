@@ -14,6 +14,15 @@
     "admin_panel": true,
     "support_system": true
   },
+  "owner": {
+    "name": "Sahkibul Islam Prohor",
+    "from": "bangladesh",
+    "address": "Companigonj Noakhali - Basurhat"
+  },
+  "Contract Url Media": {
+    "feachbook": "https://www.facebook.com/prohor245",
+    "whatsapp": "https://api.whatsapp.com/send/?phone=01852975203&text&type=phone_number&app_absent=0"
+  },
   "support_page": {
     "description": "The support page provides a structured way for users and guests to submit inquiries. It is designed to handle various types of requests efficiently.",
     "capabilities": [
